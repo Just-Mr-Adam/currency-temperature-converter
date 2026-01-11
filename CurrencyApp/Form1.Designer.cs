@@ -34,6 +34,8 @@ partial class Form1
         openFileDialog1 = new OpenFileDialog();
         FromUnitComboBox = new ComboBox();
         ToUnitComboBox = new ComboBox();
+        ConvertCurrencySetButton = new Button();
+        ConvertTemperatureSetButton = new Button();
         SuspendLayout();
         // 
         // InputTextBox
@@ -77,11 +79,33 @@ partial class Form1
         ToUnitComboBox.Size = new Size(100, 23);
         ToUnitComboBox.TabIndex = 5;
         // 
+        // ConvertCurrencySetButton
+        // 
+        ConvertCurrencySetButton.Location = new Point(12, 40);
+        ConvertCurrencySetButton.Name = "ConvertCurrencySetButton";
+        ConvertCurrencySetButton.Size = new Size(95, 39);
+        ConvertCurrencySetButton.TabIndex = 6;
+        ConvertCurrencySetButton.Text = "Валюту";
+        ConvertCurrencySetButton.UseVisualStyleBackColor = true;
+        ConvertCurrencySetButton.Click += ConvertCurrencySetButton_Click;
+        // 
+        // ConvertTemperatureSetButton
+        // 
+        ConvertTemperatureSetButton.Location = new Point(12, 85);
+        ConvertTemperatureSetButton.Name = "ConvertTemperatureSetButton";
+        ConvertTemperatureSetButton.Size = new Size(95, 39);
+        ConvertTemperatureSetButton.TabIndex = 7;
+        ConvertTemperatureSetButton.Text = "Температуру";
+        ConvertTemperatureSetButton.UseVisualStyleBackColor = true;
+        ConvertTemperatureSetButton.Click += ConvertTemperatureSetButton_Click;
+        // 
         // Form1
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(546, 323);
+        Controls.Add(ConvertTemperatureSetButton);
+        Controls.Add(ConvertCurrencySetButton);
         Controls.Add(ToUnitComboBox);
         Controls.Add(FromUnitComboBox);
         Controls.Add(OutputTextBox);
@@ -102,4 +126,6 @@ partial class Form1
     private OpenFileDialog openFileDialog1;
     private ComboBox FromUnitComboBox;
     private ComboBox ToUnitComboBox;
+    private Button ConvertCurrencySetButton;
+    private Button ConvertTemperatureSetButton;
 }
