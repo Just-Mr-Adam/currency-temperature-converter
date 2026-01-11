@@ -1,6 +1,5 @@
-
-using System;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Text.Json;
 
 namespace ConverterApp.Converters
@@ -11,7 +10,34 @@ namespace ConverterApp.Converters
 
         public override string[] GetUnits()
         {
-            return new string[] { "RUB", "USD", "EUR", "GBP", "JPY" };
+            try
+            {
+                string url = "https://www.cbr-xml-daily.ru/daily_json.js";
+
+                HttpClient client = new HttpClient();
+                string response = client.GetStringAsync(url).Result;
+
+                JsonDocument json = JsonDocument.Parse(response);
+                JsonElement valute = json.RootElement.GetProperty("Valute");
+
+                List<string> currencies = new List<string> { "RUB" };
+
+                foreach (JsonProperty currency in valute.EnumerateObject())
+                {
+                    currencies.Add(currency.Name);
+                }
+
+                return currencies.ToArray();
+            }
+            catch
+            {
+                // Если API не доступен - основные валюты
+                return new string[]
+                {
+                    "RUB", "USD", "EUR", "AUD", "AZN",
+                    "GBP", "JPY", "CNY", "CHF", "CAD"
+                };
+            }
         }
 
         public override double Convert(double value, string fromUnit, string toUnit)
@@ -20,17 +46,45 @@ namespace ConverterApp.Converters
 
             try
             {
-                // Простой тест без API
-                if (fromUnit == "USD" && toUnit == "EUR") return value * 0.92;
-                if (fromUnit == "EUR" && toUnit == "USD") return value * 1.09;
-                if (fromUnit == "USD" && toUnit == "RUB") return value * 90.5;
-                if (fromUnit == "RUB" && toUnit == "USD") return value / 90.5;
+                string url = "https://www.cbr-xml-daily.ru/daily_json.js";
 
-                return value; // заглушка
+                HttpClient client = new HttpClient();
+                string responce = client.GetStringAsync(url).Result;
+
+                JsonDocument json = JsonDocument.Parse(responce);
+                JsonElement valute = json.RootElement.GetProperty("Valute");
+
+                double fromRate, toRate;
+
+                if (fromUnit == "RUB")
+                {
+                    fromRate = 1.0;
+                }
+                else
+                {
+                    JsonElement fromCurrency = valute.GetProperty(fromUnit);
+                    fromRate = fromCurrency.GetProperty("Value").GetDouble();
+                }
+
+                if (toUnit == "RUB")
+                {
+                    toRate = 1.0;
+                }
+                else
+                {
+                    JsonElement toCurrency = valute.GetProperty(toUnit);
+                    toRate = toCurrency.GetProperty("Value").GetDouble();
+                }
+
+                double result = (value * fromRate) / toRate;
+                return Math.Round(result, 2);
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception("Ошибка конвертации");
+                // Если API не доступен - выбрасываем исключение
+                throw new InvalidOperationException(
+                    $"Не удалось получить курс валют. Проверьте интернет.\n" +
+                    $"Детали: {ex.Message}");
             }
         }
     }
