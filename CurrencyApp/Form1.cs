@@ -5,6 +5,7 @@ namespace CurrencyApp;
 public partial class Form1 : Form
 {
     TemperatureConverter temperatureConverter = new TemperatureConverter();
+    CurrencyConverter currencyConverter = new CurrencyConverter();
 
     public Form1()
     {
@@ -13,8 +14,8 @@ public partial class Form1 : Form
 
     private void Form1_Load(object sender, EventArgs e)
     {
-        ToUnitComboBox.Items.AddRange(temperatureConverter.GetUnits());
-        FromUnitComboBox.Items.AddRange(temperatureConverter.GetUnits());
+        ToUnitComboBox.Items.AddRange(currencyConverter.GetUnits());
+        FromUnitComboBox.Items.AddRange(currencyConverter.GetUnits());
     }
 
     private void ConvertButton_Click(object sender, EventArgs e)
@@ -26,7 +27,7 @@ public partial class Form1 : Form
 
             double value = Convert.ToDouble(this.InputTextBox.Text);
 
-            this.OutputTextBox.Text = temperatureConverter.Convert(value, FromUnit, ToUnit).ToString();
+            this.OutputTextBox.Text = currencyConverter.Convert(value, FromUnit, ToUnit).ToString();
         }
         catch
         {
