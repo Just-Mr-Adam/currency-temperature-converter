@@ -17,5 +17,5 @@ jobs:
         with:
           name: Версия ${{ github.ref_name }}
           body: |
-		Конвертер температур и валют
+            Конвертер температур и валют
           draft: false
