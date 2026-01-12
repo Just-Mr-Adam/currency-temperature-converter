@@ -10,7 +10,7 @@
 - Исполование API для получения актуальной информации
 
 **Скриншот**
-<img width="544" height="350" alt="image" src="https://github.com/user-attachments/assets/a0a7f8bb-700b-47d7-9c9f-f229557e0f07" />
+ - <img width="544" height="350" alt="image" src="https://github.com/user-attachments/assets/a0a7f8bb-700b-47d7-9c9f-f229557e0f07" />
 
 **Требования**
 - Windows 10 или новее
