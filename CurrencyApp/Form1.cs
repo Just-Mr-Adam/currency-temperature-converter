@@ -16,8 +16,7 @@ public partial class Form1 : Form
 
     private void Form1_Load(object sender, EventArgs e)
     {
-        ToUnitComboBox.Items.AddRange(_currentConverter.GetUnits());
-        FromUnitComboBox.Items.AddRange(_currentConverter.GetUnits());
+        ConvertTemperatureSetButton.Checked = true;
     }
 
     private void ConvertButton_Click(object sender, EventArgs e)
@@ -37,20 +36,16 @@ public partial class Form1 : Form
         }
     }
 
-    private void ConvertCurrencySetButton_Click(object sender, EventArgs e)
+    private void ConvertTemperatureSetButton_CheckedChanged(object sender, EventArgs e)
     {
-        _currentConverter = currencyConverter;
-
-        ToUnitComboBox.Items.Clear();
-        FromUnitComboBox.Items.Clear();
-
-        ToUnitComboBox.Items.AddRange(_currentConverter.GetUnits());
-        FromUnitComboBox.Items.AddRange(_currentConverter.GetUnits());
-    }
-
-    private void ConvertTemperatureSetButton_Click(object sender, EventArgs e)
-    {
-        _currentConverter = temperatureConverter;
+        if (ConvertTemperatureSetButton.Checked)
+        {
+            _currentConverter = temperatureConverter;
+        }
+        else if (ConvertCurrencySetButton.Checked)
+        {
+            _currentConverter = currencyConverter;
+        }
 
         ToUnitComboBox.Items.Clear();
         FromUnitComboBox.Items.Clear();

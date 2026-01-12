@@ -34,16 +34,23 @@ partial class Form1
         openFileDialog1 = new OpenFileDialog();
         FromUnitComboBox = new ComboBox();
         ToUnitComboBox = new ComboBox();
-        ConvertCurrencySetButton = new Button();
-        ConvertTemperatureSetButton = new Button();
+        label1 = new Label();
+        ConvertCurrencySetButton = new RadioButton();
+        ConvertTemperatureSetButton = new RadioButton();
+        panel1 = new Panel();
+        label2 = new Label();
+        label3 = new Label();
+        label4 = new Label();
+        label5 = new Label();
+        panel1.SuspendLayout();
         SuspendLayout();
         // 
         // InputTextBox
         // 
         InputTextBox.Anchor = AnchorStyles.Left;
-        InputTextBox.Location = new Point(146, 156);
+        InputTextBox.Location = new Point(108, 146);
         InputTextBox.Name = "InputTextBox";
-        InputTextBox.Size = new Size(100, 23);
+        InputTextBox.Size = new Size(145, 23);
         InputTextBox.TabIndex = 0;
         // 
         // ConvertButton
@@ -58,54 +65,116 @@ partial class Form1
         // 
         // OutputTextBox
         // 
-        OutputTextBox.Location = new Point(291, 156);
+        OutputTextBox.Location = new Point(299, 146);
         OutputTextBox.Name = "OutputTextBox";
-        OutputTextBox.Size = new Size(100, 23);
+        OutputTextBox.Size = new Size(145, 23);
         OutputTextBox.TabIndex = 3;
         // 
         // FromUnitComboBox
         // 
         FromUnitComboBox.FormattingEnabled = true;
-        FromUnitComboBox.Location = new Point(146, 185);
+        FromUnitComboBox.Location = new Point(108, 196);
         FromUnitComboBox.Name = "FromUnitComboBox";
-        FromUnitComboBox.Size = new Size(100, 23);
+        FromUnitComboBox.Size = new Size(145, 23);
         FromUnitComboBox.TabIndex = 4;
         // 
         // ToUnitComboBox
         // 
         ToUnitComboBox.FormattingEnabled = true;
-        ToUnitComboBox.Location = new Point(291, 185);
+        ToUnitComboBox.Location = new Point(299, 196);
         ToUnitComboBox.Name = "ToUnitComboBox";
-        ToUnitComboBox.Size = new Size(100, 23);
+        ToUnitComboBox.Size = new Size(145, 23);
         ToUnitComboBox.TabIndex = 5;
+        // 
+        // label1
+        // 
+        label1.AutoSize = true;
+        label1.Location = new Point(12, 9);
+        label1.Name = "label1";
+        label1.Size = new Size(99, 15);
+        label1.TabIndex = 8;
+        label1.Text = "Конвертировать:";
         // 
         // ConvertCurrencySetButton
         // 
-        ConvertCurrencySetButton.Location = new Point(12, 40);
+        ConvertCurrencySetButton.AutoSize = true;
+        ConvertCurrencySetButton.Location = new Point(3, 12);
         ConvertCurrencySetButton.Name = "ConvertCurrencySetButton";
-        ConvertCurrencySetButton.Size = new Size(95, 39);
-        ConvertCurrencySetButton.TabIndex = 6;
+        ConvertCurrencySetButton.Size = new Size(66, 19);
+        ConvertCurrencySetButton.TabIndex = 9;
+        ConvertCurrencySetButton.TabStop = true;
         ConvertCurrencySetButton.Text = "Валюту";
         ConvertCurrencySetButton.UseVisualStyleBackColor = true;
-        ConvertCurrencySetButton.Click += ConvertCurrencySetButton_Click;
+        ConvertCurrencySetButton.CheckedChanged += ConvertTemperatureSetButton_CheckedChanged;
         // 
         // ConvertTemperatureSetButton
         // 
-        ConvertTemperatureSetButton.Location = new Point(12, 85);
+        ConvertTemperatureSetButton.AutoSize = true;
+        ConvertTemperatureSetButton.Location = new Point(3, 37);
         ConvertTemperatureSetButton.Name = "ConvertTemperatureSetButton";
-        ConvertTemperatureSetButton.Size = new Size(95, 39);
-        ConvertTemperatureSetButton.TabIndex = 7;
+        ConvertTemperatureSetButton.Size = new Size(96, 19);
+        ConvertTemperatureSetButton.TabIndex = 10;
+        ConvertTemperatureSetButton.TabStop = true;
         ConvertTemperatureSetButton.Text = "Температуру";
         ConvertTemperatureSetButton.UseVisualStyleBackColor = true;
-        ConvertTemperatureSetButton.Click += ConvertTemperatureSetButton_Click;
+        ConvertTemperatureSetButton.CheckedChanged += ConvertTemperatureSetButton_CheckedChanged;
+        // 
+        // panel1
+        // 
+        panel1.Controls.Add(ConvertTemperatureSetButton);
+        panel1.Controls.Add(ConvertCurrencySetButton);
+        panel1.Location = new Point(12, 36);
+        panel1.Name = "panel1";
+        panel1.Size = new Size(106, 66);
+        panel1.TabIndex = 12;
+        // 
+        // label2
+        // 
+        label2.AutoSize = true;
+        label2.Location = new Point(108, 128);
+        label2.Name = "label2";
+        label2.Size = new Size(60, 15);
+        label2.TabIndex = 13;
+        label2.Text = "Значение";
+        // 
+        // label3
+        // 
+        label3.AutoSize = true;
+        label3.Location = new Point(299, 128);
+        label3.Name = "label3";
+        label3.Size = new Size(60, 15);
+        label3.TabIndex = 14;
+        label3.Text = "Результат";
+        // 
+        // label4
+        // 
+        label4.AutoSize = true;
+        label4.Location = new Point(108, 178);
+        label4.Name = "label4";
+        label4.Size = new Size(95, 15);
+        label4.TabIndex = 15;
+        label4.Text = "конвертация из:";
+        // 
+        // label5
+        // 
+        label5.AutoSize = true;
+        label5.Location = new Point(299, 178);
+        label5.Name = "label5";
+        label5.Size = new Size(89, 15);
+        label5.TabIndex = 16;
+        label5.Text = "конвертация в:";
         // 
         // Form1
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(546, 323);
-        Controls.Add(ConvertTemperatureSetButton);
-        Controls.Add(ConvertCurrencySetButton);
+        Controls.Add(label5);
+        Controls.Add(label4);
+        Controls.Add(label3);
+        Controls.Add(label2);
+        Controls.Add(panel1);
+        Controls.Add(label1);
         Controls.Add(ToUnitComboBox);
         Controls.Add(FromUnitComboBox);
         Controls.Add(OutputTextBox);
@@ -114,6 +183,8 @@ partial class Form1
         Name = "Form1";
         Text = "Form1";
         Load += Form1_Load;
+        panel1.ResumeLayout(false);
+        panel1.PerformLayout();
         ResumeLayout(false);
         PerformLayout();
     }
@@ -126,6 +197,12 @@ partial class Form1
     private OpenFileDialog openFileDialog1;
     private ComboBox FromUnitComboBox;
     private ComboBox ToUnitComboBox;
-    private Button ConvertCurrencySetButton;
-    private Button ConvertTemperatureSetButton;
+    private Label label1;
+    private RadioButton ConvertCurrencySetButton;
+    private RadioButton ConvertTemperatureSetButton;
+    private Panel panel1;
+    private Label label2;
+    private Label label3;
+    private Label label4;
+    private Label label5;
 }
