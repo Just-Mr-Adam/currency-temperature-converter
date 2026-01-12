@@ -1,44 +1,45 @@
 name: Release - Создать .exe
 
-permissions:
-  contents: write
-
 on:
   push:
     tags:
       - 'v*'
+
+permissions:
+  contents: write
 
 jobs:
   publish:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Установка .NET
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'   # ← если у тебя .NET 10, ок; если нет — поменяй на 8.0.x / 9.0.x
+          dotnet-version: '10.0.x'
 
-      - name: Восстановить пакеты
+      - name: Restore dependencies
         run: dotnet restore
 
-      - name: Опубликовать один .exe
-        run: >
-          dotnet publish CurrencyApp.csproj
-          --configuration Release
-          -r win-x64
-          --self-contained true
-          -p:PublishSingleFile=true
-          -o ./publish
+      - name: Publish Single-File EXE
+        run: |
+          dotnet publish CurrencyApp.csproj `
+            --configuration Release `
+            -r win-x64 `
+            --self-contained true `
+            -p:PublishSingleFile=true `
+            -o ./publish
 
-      - name: Создать релиз на GitHub
+      - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          token: ${{ secrets.GH_RELEASE_TOKEN }}   # ← ВОТ СЮДА ВСТАВЛЯЕМ ТОКЕН (секрет)
-          name: Версия ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
           body: |
-            Новая версия ${{ github.ref_name }}
-            Один файл .exe для Windows
-            Конвертер валют (по курсам ЦБ) + температуры
+            Автоматический релиз ${{ github.ref_name }}
+            Один файл .exe для Windows (конвертер валют + температуры)
           files: ./publish/CurrencyApp.exe
+          draft: false
+          prerelease: false

@@ -103,6 +103,6 @@ public static class TestRunner
             testsFailed++;
         }
 
-        return testsFailed == 0 ? 1 : 0;
+        return testsFailed == 0 ? 0 : 1;
     }
 }

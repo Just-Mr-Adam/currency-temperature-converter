@@ -1,4 +1,4 @@
-name: CI - Проверка сборки
+name: CI - Build & Run Tests
 
 on:
   push:
@@ -6,19 +6,23 @@ on:
   pull_request:
 
 jobs:
-  build:
+  build-and-test:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Установка .NET
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
 
-      - name: Восстановить пакеты
+      - name: Restore dependencies
         run: dotnet restore
 
-      - name: Собрать проект
-        run: dotnet build --configuration Release
+      - name: Build Release
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run custom tests
+        run: dotnet run --project CurrencyApp.csproj --no-build -- --test
