@@ -1,0 +1,24 @@
+name: CI - Проверка сборки
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Установка .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Восстановить пакеты
+        run: dotnet restore
+
+      - name: Собрать проект
+        run: dotnet build --configuration Release
