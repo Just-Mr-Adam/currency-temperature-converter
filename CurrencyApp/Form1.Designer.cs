@@ -42,15 +42,17 @@ partial class Form1
         label3 = new Label();
         label4 = new Label();
         label5 = new Label();
+        panel2 = new Panel();
         panel1.SuspendLayout();
+        panel2.SuspendLayout();
         SuspendLayout();
         // 
         // InputTextBox
         // 
         InputTextBox.Anchor = AnchorStyles.Left;
-        InputTextBox.Location = new Point(108, 146);
+        InputTextBox.Location = new Point(3, 18);
         InputTextBox.Name = "InputTextBox";
-        InputTextBox.Size = new Size(145, 23);
+        InputTextBox.Size = new Size(176, 23);
         InputTextBox.TabIndex = 0;
         // 
         // ConvertButton
@@ -65,25 +67,25 @@ partial class Form1
         // 
         // OutputTextBox
         // 
-        OutputTextBox.Location = new Point(299, 146);
+        OutputTextBox.Location = new Point(213, 18);
         OutputTextBox.Name = "OutputTextBox";
-        OutputTextBox.Size = new Size(145, 23);
+        OutputTextBox.Size = new Size(176, 23);
         OutputTextBox.TabIndex = 3;
         // 
         // FromUnitComboBox
         // 
         FromUnitComboBox.FormattingEnabled = true;
-        FromUnitComboBox.Location = new Point(108, 196);
+        FromUnitComboBox.Location = new Point(3, 75);
         FromUnitComboBox.Name = "FromUnitComboBox";
-        FromUnitComboBox.Size = new Size(145, 23);
+        FromUnitComboBox.Size = new Size(176, 23);
         FromUnitComboBox.TabIndex = 4;
         // 
         // ToUnitComboBox
         // 
         ToUnitComboBox.FormattingEnabled = true;
-        ToUnitComboBox.Location = new Point(299, 196);
+        ToUnitComboBox.Location = new Point(213, 75);
         ToUnitComboBox.Name = "ToUnitComboBox";
-        ToUnitComboBox.Size = new Size(145, 23);
+        ToUnitComboBox.Size = new Size(176, 23);
         ToUnitComboBox.TabIndex = 5;
         // 
         // label1
@@ -131,7 +133,7 @@ partial class Form1
         // label2
         // 
         label2.AutoSize = true;
-        label2.Location = new Point(108, 128);
+        label2.Location = new Point(3, 0);
         label2.Name = "label2";
         label2.Size = new Size(60, 15);
         label2.TabIndex = 13;
@@ -140,7 +142,7 @@ partial class Form1
         // label3
         // 
         label3.AutoSize = true;
-        label3.Location = new Point(299, 128);
+        label3.Location = new Point(213, 0);
         label3.Name = "label3";
         label3.Size = new Size(60, 15);
         label3.TabIndex = 14;
@@ -149,7 +151,7 @@ partial class Form1
         // label4
         // 
         label4.AutoSize = true;
-        label4.Location = new Point(108, 178);
+        label4.Location = new Point(3, 57);
         label4.Name = "label4";
         label4.Size = new Size(95, 15);
         label4.TabIndex = 15;
@@ -158,33 +160,43 @@ partial class Form1
         // label5
         // 
         label5.AutoSize = true;
-        label5.Location = new Point(299, 178);
+        label5.Location = new Point(213, 57);
         label5.Name = "label5";
         label5.Size = new Size(89, 15);
         label5.TabIndex = 16;
         label5.Text = "конвертация в:";
+        // 
+        // panel2
+        // 
+        panel2.Controls.Add(label5);
+        panel2.Controls.Add(label4);
+        panel2.Controls.Add(label3);
+        panel2.Controls.Add(label2);
+        panel2.Controls.Add(ToUnitComboBox);
+        panel2.Controls.Add(FromUnitComboBox);
+        panel2.Controls.Add(OutputTextBox);
+        panel2.Controls.Add(InputTextBox);
+        panel2.Location = new Point(82, 108);
+        panel2.Name = "panel2";
+        panel2.Size = new Size(395, 110);
+        panel2.TabIndex = 17;
         // 
         // Form1
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(546, 323);
-        Controls.Add(label5);
-        Controls.Add(label4);
-        Controls.Add(label3);
-        Controls.Add(label2);
+        Controls.Add(panel2);
         Controls.Add(panel1);
         Controls.Add(label1);
-        Controls.Add(ToUnitComboBox);
-        Controls.Add(FromUnitComboBox);
-        Controls.Add(OutputTextBox);
         Controls.Add(ConvertButton);
-        Controls.Add(InputTextBox);
         Name = "Form1";
         Text = "Form1";
         Load += Form1_Load;
         panel1.ResumeLayout(false);
         panel1.PerformLayout();
+        panel2.ResumeLayout(false);
+        panel2.PerformLayout();
         ResumeLayout(false);
         PerformLayout();
     }
@@ -205,4 +217,5 @@ partial class Form1
     private Label label3;
     private Label label4;
     private Label label5;
+    private Panel panel2;
 }

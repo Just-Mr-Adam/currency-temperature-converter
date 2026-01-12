@@ -20,11 +20,14 @@ namespace ConverterApp.Converters
                 JsonDocument json = JsonDocument.Parse(response);
                 JsonElement valute = json.RootElement.GetProperty("Valute");
 
-                List<string> currencies = new List<string> { "RUB" };
+                List<string> currencies = new List<string> { "Российский RUB" };
 
                 foreach (JsonProperty currency in valute.EnumerateObject())
                 {
-                    currencies.Add(currency.Name);
+                    string code = currency.Name;
+                    string name = currency.Value.GetProperty("Name").GetString() ?? code;
+
+                    currencies.Add($"{name} {code}");
                 }
 
                 return currencies.ToArray();
@@ -34,15 +37,25 @@ namespace ConverterApp.Converters
                 // Если API не доступен - основные валюты
                 return new string[]
                 {
-                    "RUB", "USD", "EUR", "AUD", "AZN",
-                    "GBP", "JPY", "CNY", "CHF", "CAD"
-                };
+                    "Российский рубль RUB",
+                    "Доллар США USD",
+                    "Евро EUR",
+                    "Фунт стерлингов Великобритании GBP",
+                    "Китайский юань CNY",
+                    "Японская иена JPY",
+                    "Швейцарский франк CHF",
+                    "Канадский доллар CAD",
+                    "Австралийский доллар AUD"
+                 };
             }
         }
 
         public override double Convert(double value, string fromUnit, string toUnit)
         {
             if (fromUnit == toUnit) return value;
+
+            fromUnit = fromUnit.Split(' ').Last();
+            toUnit = toUnit.Split(' ').Last();
 
             try
             {
